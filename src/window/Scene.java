@@ -1,3 +1,7 @@
+package window;
+
+import client.Main;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -8,6 +12,7 @@ public class Scene {
     private int height;
     private int width;
     private String windowName;
+    private JPanel drawPanel;
     // User settings
     private static Color bgColor = Color.WHITE;
     private static Font btnFont  = new Font(Font.SANS_SERIF, Font.PLAIN,  25);
@@ -55,6 +60,8 @@ public class Scene {
         JButton optionBtn = createBtn("Options", mainMenu);
         JButton aboutBtn = createBtn("About", mainMenu);
 
+        drawPanel = createPanel(frame);
+
         JLabel about = new JLabel("Welcome to Simon.");
         about.setFont(labelFont);
 
@@ -93,5 +100,15 @@ public class Scene {
         panel.add(button);
 
         return button;
+    }
+    public JPanel createPanel(JFrame frame) {
+        JPanel panel = new JPanel();
+
+        frame.add(panel);
+
+        return panel;
+    }
+    public JPanel getDrawPanel() {
+        return drawPanel;
     }
 }
