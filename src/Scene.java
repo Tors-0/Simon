@@ -5,16 +5,22 @@ import java.awt.*;
 public class Scene {
     // Variables:
     // Field variables
-    private int height;
-    private int width;
-    private String windowName;
+    private int height; // The width of the window
+    private int width; // The height of the window
+    private String windowName; // The name of the window
     // User settings
-    private static Color bgColor = Color.WHITE;
-    private static Font btnFont  = new Font(Font.SANS_SERIF, Font.PLAIN,  25);
-    private static Font titleFont = new Font(Font.SANS_SERIF, Font.BOLD,  50);
-    private static Font labelFont = new Font(Font.SANS_SERIF, Font.PLAIN,  30);
+    private static Color bgColor = Color.WHITE; // The background color of the game
+    private static Font btnFont  = new Font(Font.SANS_SERIF, Font.PLAIN,  25); // The font for buttons
+    private static Font titleFont = new Font(Font.SANS_SERIF, Font.BOLD,  50); // The font for the title
+    private static Font textFont = new Font(Font.SANS_SERIF, Font.PLAIN,  15); // The font for labels
 
-    // Constructors:
+    /**
+     * The default constructor.
+     * @author Kiefer Menard
+     * @param width The width of the window
+     * @param height The height of the window
+     * @param windowName The name of the window
+     */
     public Scene(int width, int height, String windowName) {
         // Variables
         this.height = height;
@@ -42,9 +48,13 @@ public class Scene {
         mainMenu.setLayout(new GridLayout(4, 1));
         mainMenu.setBackground(bgColor);
 
-        JPanel secondaryMenu = new JPanel();
-        secondaryMenu.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        secondaryMenu.setBackground(bgColor);
+        JPanel optionsMenu = new JPanel();
+        optionsMenu.setLayout(new GridLayout(3, 1, 10, 10));
+        optionsMenu.setBackground(bgColor);
+
+        JPanel aboutMenu = new JPanel();
+        aboutMenu.setLayout(new GridLayout(3, 1, 10, 10));
+        aboutMenu.setBackground(bgColor);
 
         JLabel title = new JLabel("Simon");
         title.setFont(titleFont);
@@ -55,31 +65,30 @@ public class Scene {
         JButton optionBtn = createBtn("Options", mainMenu);
         JButton aboutBtn = createBtn("About", mainMenu);
 
-        JLabel about = new JLabel("Welcome to Simon.");
-        about.setFont(labelFont);
-
         JLabel options = new JLabel("Options.");
-        options.setFont(labelFont);
+        options.setFont(textFont);
 
-        secondaryMenu.add(about);
-        secondaryMenu.add(options);
-        about.setVisible(false);
-        options.setVisible(false);
+        JTextArea about = createText("Welcome to Simon.\n\nHow to play:\nThere are 4 buttons colored red, green, blue, and yellow.\nOne of the buttons will flash and you have to click that same one.\nAfter that the one that just flashed will flash again followed by a second flash on another button.\nYou then have to click those buttons following the pattern.\nThis will continue each time getting 1 flash longer until you incorrectly repeat the pattern.\n\nMade by Kiefer Menard.", aboutMenu);
+
+        aboutMenu.add(about);
 
         menuContainer.add(mainMenu);
-        menuContainer.add(secondaryMenu);
+        menuContainer.add(optionsMenu);
+        optionsMenu.setVisible(false);
+        menuContainer.add(aboutMenu);
+        aboutMenu.setVisible(false);
         frame.add(menuContainer);
 
         startBtn.addActionListener(e -> Main.startGame());
 
         optionBtn.addActionListener(e -> {
-            about.setVisible(false);
-            options.setVisible(true);
+            aboutMenu.setVisible(false);
+            optionsMenu.setVisible(true);
         });
 
         aboutBtn.addActionListener(e -> {
-            options.setVisible(false);
-            about.setVisible(true);
+            optionsMenu.setVisible(false);
+            aboutMenu.setVisible(true);
         });
 
         frame.setVisible(true);
@@ -93,5 +102,14 @@ public class Scene {
         panel.add(button);
 
         return button;
+    }
+
+    public JTextArea createText(String text, JPanel panel) {
+        JTextArea label = new JTextArea(text);
+        label.setFont(textFont);
+
+        panel.add(label);
+
+        return label;
     }
 }
