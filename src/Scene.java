@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Scene {
     // Variables:
@@ -95,31 +93,5 @@ public class Scene {
         panel.add(button);
 
         return button;
-    }
-
-    // Getter methods
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public String getWindowName() {
-        return windowName;
-    }
-
-    // Setter methods
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setWindowName(String windowName) {
-        this.windowName = windowName;
     }
 }
